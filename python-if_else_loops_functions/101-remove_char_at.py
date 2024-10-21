@@ -1,4 +1,5 @@
 #!/usr/bin/python3
-print("{}".format(''.join(
-    chr((i - 65) % 26 + (65 if i % 2 else 97)) for i in range(90, 64, -1)
-)), end="")
+def remove_char_at(str, n):
+    if n < 0 or n >= len(str):
+        return str
+    return str[:n] + str[n+1:]
