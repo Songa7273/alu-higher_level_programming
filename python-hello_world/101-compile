@@ -1,2 +1,20 @@
 #!/bin/bash
-python3 -m py_compile "$PYFILE" && mv "${PYFILE%.*}".cpython-*.pyc "${PYFILE}c" || exit 1
+python3 <<EOF
+import py_compile
+import os
+import sys
+
+pyfile = os.getenv('PYFILE')
+if not pyfile:
+    print("Error: PYFILE environment variable is not set.")
+    sys.exit(1)
+
+output_file = f"{pyfile}c"
+print(f"Compiling {pyfile} ...")
+
+try:
+    py_compile.compile(pyfile, cfile=output_file, doraise=True)
+except py_compile.PyCompileError as e:
+    print(f"Compilation failed: {e}")
+    sys.exit(1)
+EOF
