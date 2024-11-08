@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-"""Defines a Rectangle class."""
+# 0-lookup.py
+"""Defines an object attribute lookup function."""
 
 
-class Rectangle:
-    """Represent a rectangle."""
-    pass
+def lookup(obj):
+    """Return a list of an object's available attributes."""
+    return (dir(obj))
